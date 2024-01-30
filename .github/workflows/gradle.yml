@@ -43,5 +43,5 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build -t $login-server/cardvisorBE:${{ github.sha }} .
-        docker push $login-server/cardvisorBE:${{ github.sha }}
+        docker build -t ${login-server}/cardvisorBE:${{ github.sha }} .
+        docker push ${login-server}/cardvisorBE:${{ github.sha }}
