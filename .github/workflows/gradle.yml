@@ -39,7 +39,7 @@ jobs:
     - name: 'Build and push image'
       uses: azure/docker-login@v1
       with:
-        registry: ${{ secrets.REGISTRY_SERVER_NAME }}
+        login-server: ${{ secrets.REGISTRY_SERVER_NAME }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     
