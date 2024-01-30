@@ -42,7 +42,6 @@ jobs:
         login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-        IMAGE_TAG: ${{ github.sha }}
     - run: |
-        docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/cardvisorBE:$IMAGE_TAG .
-        docker push ${{ env.REGISTRY_SERVER_NAME }}/cardvisorBE:$IMAGE_TAG
+        docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/cardvisorBE:${{ github.sha }} .
+        docker push ${{ env.REGISTRY_SERVER_NAME }}/cardvisorBE:${{ github.sha }}
