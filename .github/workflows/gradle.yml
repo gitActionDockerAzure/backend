@@ -37,7 +37,7 @@ jobs:
       run: ./gradlew build
   
     - name: 'Build and push image'
-      uses: docker/login-action@v1
+      uses: azure/docker-login@v1
       with:
         registry: ${{ secrets.REGISTRY_SERVER_NAME }}
         username: ${{ secrets.REGISTRY_USERNAME }}
