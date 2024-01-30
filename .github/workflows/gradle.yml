@@ -43,5 +43,5 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/cardvisorbe:latest .
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/cardvisorbe:latest
+        docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/cardvisorbe .
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/cardvisorbe
