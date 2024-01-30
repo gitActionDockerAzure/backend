@@ -43,7 +43,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        echo ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        echo ${{ secrets.REGISTRY_SERVER_NAME }}
         echo ${{ secrets.REGISTRY_USERNAME }}
         echo ${{ secrets.REGISTRY_PASSWORD }}
         docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/cardvisorBE:${{ github.sha }}
