@@ -1,1 +1,1 @@
-gitActionDockerAzureTest1
+gitActionDockerAzureTest
