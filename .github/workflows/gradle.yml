@@ -39,12 +39,10 @@ jobs:
     - name: 'Azure Container Login AND Build and push Docker image'
       uses: azure/docker-login@v1
       with:
-        login-server: ${{ env.REGISTRY_SERVER_NAME }}
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
+        IMAGE_TAG: ${{ github.sha }}
     - run: |
-        echo ${{ secrets.REGISTRY_SERVER_NAME }}
-        echo ${{ secrets.REGISTRY_USERNAME }}
-        echo ${{ secrets.REGISTRY_PASSWORD }}
-        docker build . -t ${{ env.REGISTRY_SERVER_NAME }}/cardvisorBE:${{ github.sha }}
-        docker push ${{ env.REGISTRY_SERVER_NAME }}/cardvisorBE:${{ github.sha }}
+        docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/cardvisorBE:$IMAGE_TAG
+        docker push ${{ env.REGISTRY_SERVER_NAME }}/cardvisorBE:$IMAGE_TAG
