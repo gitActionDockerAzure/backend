@@ -30,7 +30,7 @@ ENV LC_ALL ko_KR.UTF-8
 COPY --from=backend-build /app/dockertest-0.0.1-SNAPSHOT.jar /app/
 COPY --from=frontend-build /app /var/www/html
 COPY ../../backend/.github/workflows/000-default.conf /etc/apache2/sites-available/
-COPY ../../backend/.github/workflows/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-CMD ["/usr/bin/supervisord"]
+COPY start.sh /start.sh
+CMD ["/bin/bash", "/start.sh"]
 
 EXPOSE 80
