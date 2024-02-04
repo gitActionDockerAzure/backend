@@ -15,7 +15,7 @@ RUN apt-get update && \
     apt-get install -y apache2 && \
     a2enmod proxy && \
     a2enmod proxy_http && \
-    service apache2 restart \
+    service apache2 restart && \
     apt-get install -y openjdk-17-jdk && \
     apt-get install -y tzdata && \
     apt-get install -y locales && \
@@ -27,7 +27,7 @@ ENV LANG ko_KR.UTF-8
 ENV LANGUAGE ko_KR:ko  
 ENV LC_ALL ko_KR.UTF-8
 
-COPY --from=backend-build /app/dockertest-0.0.1-SNAPSHOT.jar /app
+COPY --from=backend-build /app/dockertest-0.0.1-SNAPSHOT.jar /app/
 COPY --from=frontend-build /app /var/www/html
 COPY ../../backend/.github/workflows/000-default.conf /etc/apache2/sites-available/
 COPY ../../backend/.github/workflows/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
