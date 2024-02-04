@@ -28,7 +28,7 @@ ENV LANGUAGE ko_KR:ko
 ENV LC_ALL ko_KR.UTF-8
     
 COPY --from=frontend-build /app /var/www/html
-COPY --from=backend-build /app/*.jar /app/
+COPY --from=backend-build /app/dockertest-0.0.1-SNAPSHOT.jar /app/
 COPY ../../backend/.github/workflows/000-default.conf /etc/apache2/sites-available/
 COPY ../../backend/.github/workflows/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord"]
