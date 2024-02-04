@@ -26,5 +26,6 @@ ENV LC_ALL ko_KR.UTF-8
 COPY --from=frontend-build /app /var/www/html
 COPY --from=backend-build /app/*.jar /app/
 COPY ../../backend/.github/workflows/000-default.conf /etc/apache2/sites-available/
-CMD service apache2 start && while true; do sleep 1000; done & java -jar /app/*.jar
+CMD service apache2 start && java -jar /app/*.jar
+
 EXPOSE 80
