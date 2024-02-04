@@ -9,6 +9,7 @@ WORKDIR /app
 COPY backend-build/build/libs/ ./
 
 # Stage 3: Set up the Apache server
+FROM ubuntu:20.04 as server-setup
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y apache2 && \
     apt-get install -y openjdk-17-jdk && \
