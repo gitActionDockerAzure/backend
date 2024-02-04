@@ -16,14 +16,14 @@ jobs:
       with:
         repository: gitActionDockerAzure/backend
         path: backend
-        token: ${{ secrets.PAT }}
+        token: ${{ secrets.REPO_PAT }}
 
     - name: 'Checkout frontend repository'
       uses: actions/checkout@v2
       with:
         repository: gitActionDockerAzure/frontend
         path: frontend
-        token: ${{ secrets.PAT }}
+        token: ${{ secrets.REPO_PAT }}
 
     # Spring build JAR
     - name: 'Set execute permissions for Gradle'
