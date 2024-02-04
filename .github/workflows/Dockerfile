@@ -15,7 +15,7 @@ RUN apt-get update && \
     apt-get install -y apache2 && \
     a2enmod proxy && \
     a2enmod proxy_http && \
-    systemctl restart apache2 \
+    service restart apache2 \
     apt-get install -y openjdk-17-jdk && \
     apt-get install -y tzdata && \
     apt-get install -y locales && \
