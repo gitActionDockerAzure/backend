@@ -1,12 +1,12 @@
 # Stage 1: Copy the React application
 FROM node as frontend-build
 WORKDIR /app
-COPY frontend-build/build/ ./
+COPY ../../frontend/build/ ./
 
 # Stage 2: Copy the Spring Boot application
 FROM openjdk as backend-build
 WORKDIR /app
-COPY backend-build/build/libs/ ./
+COPY ../../backend/build/libs/ ./
 
 # Stage 3: Set up the Apache server
 FROM ubuntu:20.04 as server-setup
