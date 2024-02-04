@@ -27,7 +27,7 @@ jobs:
 
     # Spring build JAR
     - name: 'Set execute permissions for Gradle'
-      run: chmod +x ./backend/gradlew
+      run: chmod +x ./gradlew
       working-directory: ./backend
 
     - name: 'Set up JDK 17'
