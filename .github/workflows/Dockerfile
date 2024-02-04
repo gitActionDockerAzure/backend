@@ -1,5 +1,5 @@
 # Stage 1: Build the React application
-FROM node:14 as frontend
+FROM node as frontend
 WORKDIR /app
 COPY frontend/package*.json ./
 RUN npm install
@@ -7,7 +7,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Stage 2: Build the Spring Boot application
-FROM openjdk:17 as backend
+FROM openjdk as backend
 WORKDIR /app
 COPY backend/ ./
 RUN chmod +x ./gradlew
@@ -22,7 +22,7 @@ RUN apt-get update && \
 
 COPY --from=frontend /app/build /var/www/html
 COPY --from=backend /app/build/libs/*.jar /app/
-COPY 000-default.conf /etc/apache2/sites-available/
+COPY backend/.github/workflows/000-default.conf /etc/apache2/sites-available/
 CMD service apache2 start && java -jar /app/*.jar
 
 EXPOSE 80
