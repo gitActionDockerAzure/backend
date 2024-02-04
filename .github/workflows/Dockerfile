@@ -31,6 +31,8 @@ COPY --from=backend-build /app/dockertest-0.0.1-SNAPSHOT.jar /app/
 COPY --from=frontend-build /app /var/www/html
 COPY ../../backend/.github/workflows/000-default.conf /etc/apache2/sites-available/
 COPY ../../backend/.github/workflows/start.sh /start.sh
+RUN apt-get install -y tini
+ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/bin/bash", "/start.sh"]
 
 EXPOSE 80
