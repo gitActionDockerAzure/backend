@@ -1,12 +1,12 @@
 # Stage 1: Copy the React application
-FROM node as frontend
+FROM node as frontend-build
 WORKDIR /app
-COPY frontend/build/ ./
+COPY frontend-build/build/ ./
 
 # Stage 2: Copy the Spring Boot application
-FROM openjdk as backend
+FROM openjdk as backend-build
 WORKDIR /app
-COPY backend/build/libs/ ./
+COPY backend-build/build/libs/ ./
 
 # Stage 3: Set up the Apache server
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
@@ -14,8 +14,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y openjdk-17-jdk && \
     rm -rf /var/lib/apt/lists/*
     
-COPY --from=frontend /app /var/www/html
-COPY --from=backend /app/*.jar /app/
+COPY --from=frontend-build /app /var/www/html
+COPY --from=backend-build /app/*.jar /app/
 COPY backend/.github/workflows/000-default.conf /etc/apache2/sites-available/
 CMD service apache2 start && java -jar /app/*.jar
 
