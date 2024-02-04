@@ -17,6 +17,7 @@ RUN apt-get update && \
     apt-get install -y tzdata && \
     apt-get install -y locales && \
     locale-gen ko_KR.UTF-8 && \
+    apt-get install -y supervisor && \
     rm -rf /var/lib/apt/lists/*
 
 ENV LANG ko_KR.UTF-8  
@@ -26,6 +27,7 @@ ENV LC_ALL ko_KR.UTF-8
 COPY --from=frontend-build /app /var/www/html
 COPY --from=backend-build /app/*.jar /app/
 COPY ../../backend/.github/workflows/000-default.conf /etc/apache2/sites-available/
-CMD service apache2 start && java -jar /app/*.jar
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+CMD ["/usr/bin/supervisord"]
 
 EXPOSE 80
