@@ -27,7 +27,7 @@ ENV LC_ALL ko_KR.UTF-8
 COPY --from=frontend-build /app /var/www/html
 COPY --from=backend-build /app/*.jar /app/
 COPY ../../backend/.github/workflows/000-default.conf /etc/apache2/sites-available/
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ../../backend/.github/workflows/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord"]
 
 EXPOSE 80
