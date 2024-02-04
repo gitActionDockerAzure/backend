@@ -15,7 +15,13 @@ RUN apt-get update && \
     apt-get install -y apache2 && \
     apt-get install -y openjdk-17-jdk && \
     apt-get install -y tzdata && \
+    apt-get install -y locales && \
+    locale-gen ko_KR.UTF-8 && \
     rm -rf /var/lib/apt/lists/*
+
+ENV LANG ko_KR.UTF-8  
+ENV LANGUAGE ko_KR:ko  
+ENV LC_ALL ko_KR.UTF-8
     
 COPY --from=frontend-build /app /var/www/html
 COPY --from=backend-build /app/*.jar /app/
