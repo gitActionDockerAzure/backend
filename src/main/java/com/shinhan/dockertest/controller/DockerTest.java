@@ -22,4 +22,9 @@ public class DockerTest {
 	public String temp3() {
 		return "temp2 스프링 접근 완료";
 	}
+	
+	@GetMapping("/temp3")
+	public String temp4() {
+		return "temp3 스프링 접근 완료";
+	}
 }
