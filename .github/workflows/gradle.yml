@@ -2,9 +2,9 @@ name: 'Azure Login And Build Project And Make-Push Docker IMG'
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -12,9 +12,9 @@ jobs:
 
     steps:
     - name: 'Checkout backend repository'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-        repository: gitActionDockerAzure/backend
+        repository: CardVisor/BackEnd
         path: ./backend
         token: ${{ secrets.REPO_PAT }}
         
@@ -23,10 +23,10 @@ jobs:
         touch ./src/main/resources/application.yml
         echo "${{ secrets.APPLICATION_YML }}" > ./src/main/resources/application.yml
         cat ./src/main/resources/application.yml 
-      working-directory: ./backend
+      working-directory: ./backend/CardVisor
       
     - name: 'Set up JDK 17'
-      uses: actions/setup-java@v2
+      uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'adopt'
@@ -35,23 +35,26 @@ jobs:
       run: chmod +x ./gradlew && ./gradlew clean build -x test
       env:
           CI: "false"
-      working-directory: ./backend
+      working-directory: ./backend/CardVisor
     
     # React build NODE
     - name: 'Checkout frontend repository'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-        repository: gitActionDockerAzure/frontend
-        ref: 'main'
+        repository: CardVisor/FrontEnd
+        ref: 'hwasoo'
         path: ./frontend
         token: ${{ secrets.REPO_PAT }}
-
+    - name: 'Set up .env for frontend'
+      run: |
+        touch ./.env
+        echo "${{ secrets.REACT_ENV }}" > ./.env
+      working-directory: ./frontend
+      
     - name: 'Set up Node.js'
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
-        node-version: '14'
-    - run: touch ./.env
-    - run: echo "${{ secrets.REACT_ENV }}" > ./.env     
+        node-version: '14' 
 
     - name: 'Install frontend dependencies and build'
       run: |
